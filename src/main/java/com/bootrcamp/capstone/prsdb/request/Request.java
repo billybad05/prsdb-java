@@ -1,8 +1,12 @@
 package com.bootrcamp.capstone.prsdb.request;
 
+import java.util.List;
+
 import javax.persistence.*;
 
+import com.bootrcamp.capstone.prsdb.requestline.Requestline;
 import com.bootrcamp.capstone.prsdb.user.User;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="Requests")
@@ -26,8 +30,18 @@ public class Request {
 	@ManyToOne(optional=false)
 	@JoinColumn(name="userId", columnDefinition="int")
 	private User user;
+	@JsonManagedReference
+	@OneToMany(mappedBy="request")
+	private List<Requestline> requestlines;
 	
 	public Request () {}
+	
+	public List<Requestline> getRequestlines() {
+		return requestlines;
+	}
+	public void setRequestlines(List<Requestline> requestlines) {
+		this.requestlines = requestlines;
+	}
 
 	public int getId() {
 		return id;
