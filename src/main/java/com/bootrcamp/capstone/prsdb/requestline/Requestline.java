@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 import com.bootrcamp.capstone.prsdb.product.Product;
 import com.bootrcamp.capstone.prsdb.request.Request;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="Requestlines")
@@ -13,6 +14,7 @@ public class Requestline {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private int quantity = 1;
+	@JsonBackReference
 	@ManyToOne(optional=false)
 	@JoinColumn(name="requestId", columnDefinition="int")
 	private Request request;
